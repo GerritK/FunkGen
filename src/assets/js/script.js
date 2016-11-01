@@ -23,6 +23,10 @@
         };
     });
 
+    app.controller('ConfigurationController', function () {
+
+    });
+
     app.controller('GenerateController', function () {
 
     });

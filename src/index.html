@@ -59,14 +59,36 @@
 
             <hr>
 
-            <div>
+            <div ng-controller="ConfigurationController as configCtrl">
                 <h2>Übung</h2>
-                <div class="row">
-                    <form>
-
-                    </form>
-                </div>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="configDuration">Übungsdauer in Minuten</label>
+                                <input class="form-control" id="configDuration" ng-model="configCtrl.configDuration" type="number" ng-mod>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="configInterval">Interval der Nachrichten in Minuten</label>
+                                <input class="form-control" id="configInterval" ng-model="configCtrl.configInterval" type="number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="configCtrl.configMultipleDestinations"> Sammelrufe erzeugen
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
+
+            <hr>
 
             <div ng-controller="GenerateController as generateCtrl">
                 <div class="row">
