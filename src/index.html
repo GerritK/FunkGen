@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Funk Generator</title>
+
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/jquery-3.1.1.slim.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body ng-app="funk-gen">
+<div class="container">
+    <div class="title">
+        <h2>Funk Generator</h2>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Konfiguration
+        </div>
+        <div class="panel-body">
+            <div ng-controller="VehicleConfigController as vehicleCtrl">
+                <h2>Teilnehmer</h2>
+                <div class="row">
+                    <form ng-submit="vehicleCtrl.addVehicle(vehicleCtrl.vehicleName, vehicleCtrl.vehicleNumber)">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="vehicleName" ng-model="vehicleCtrl.vehicleName" placeholder="TSF-W Musterhausen" required>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="vehicleNumber" ng-model="vehicleCtrl.vehicleNumber" placeholder="Florian Musterhausen 1-41-01" required>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-default" style="width: 100%">Hinzufügen</button>
+                        </div>
+                    </form>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-3" ng-repeat="vehicle in vehicleCtrl.vehicles track by $index">
+                        <div class="item panel panel-default">
+                            <div class="item-action glyphicon glyphicon-remove" ng-click="vehicleCtrl.removeVehicle($index)"></div>
+                            <strong>{{vehicle.name}}</strong><br>
+                            <em>{{vehicle.number}}</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!--<div>
+                <h2>Übung</h2>
+            </div>-->
+
+            <div ng-controller="GenerateController as generateCtrl">
+                <div class="row">
+                    <div class="col-md-offset-5 col-md-2">
+                        <button type="submit" class="btn btn-primary" style="width: 100%" ng-click="">Generieren</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Funküberwachung
+        </div>
+        <div class="panel-body">
+            <div ng-controller="MessagesController as msgCtrl" class="monospace">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="message in msgCtrl.messages track by $index">
+                        <strong>x + {{message.offset}}</strong><br/>
+<!--                        <div class="row">
+                            <div class="col-md-3"><strong>Sender:</strong> {{msgCtrl.getVehicle(message.src).name}}</div>
+                            <div class="col-md-3"><strong>Empfänger:</strong> {{msgCtrl.getVehicle(message.dst).name}}</div>
+                            <div class="col-md-3"><strong>Durchsage</strong> ({{message.announcement ? 'x' : ' '}})</div>
+                            <div class="col-md-3"><strong>Absetzzeit:</strong> x + {{message.offset}}</div>
+                        </div>-->
+                        <hr>
+                        <p>
+                            <strong>{{msgCtrl.getVehicle(message.dst).number}}</strong><br/>
+                            von <strong>{{msgCtrl.getVehicle(message.src).number}}</strong> &lt;{{message.announcement ? 'D' : 'G'}}&gt;<br/>
+                            {{message.msg}}
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

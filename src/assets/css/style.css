@@ -1,0 +1,21 @@
+.item {
+    padding: 5px;
+    position: relative;
+}
+
+.item .item-action {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    right: 5px;
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
+.item .item-action:hover {
+    color: #d9534f;
+}
+
+.monospace {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
