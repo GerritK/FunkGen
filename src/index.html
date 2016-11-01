@@ -28,7 +28,7 @@
             <div ng-controller="VehicleConfigController as vehicleCtrl">
                 <h2>Teilnehmer</h2>
                 <div class="row">
-                    <form ng-submit="vehicleCtrl.addVehicle(vehicleCtrl.vehicleName, vehicleCtrl.vehicleNumber)">
+                    <form ng-submit="vehicleCtrl.submitVehicle()">
                         <div class="col-md-5">
                             <input type="text" class="form-control" id="vehicleName" ng-model="vehicleCtrl.vehicleName" placeholder="TSF-W Musterhausen" required>
                         </div>
@@ -59,9 +59,14 @@
 
             <hr>
 
-            <!--<div>
+            <div>
                 <h2>Übung</h2>
-            </div>-->
+                <div class="row">
+                    <form>
+
+                    </form>
+                </div>
+            </div>
 
             <div ng-controller="GenerateController as generateCtrl">
                 <div class="row">

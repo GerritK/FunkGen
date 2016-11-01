@@ -4,13 +4,18 @@
     app.controller('VehicleConfigController', function () {
         this.vehicles = vehicles;
 
+        this.submitVehicle = function () {
+            this.addVehicle(this.vehicleName, this.vehicleNumber);
+            this.vehicleName = "";
+            this.vehicleNumber = "";
+            $('#vehicleName').focus();
+        };
+
         this.addVehicle = function (name, number) {
             this.vehicles.push({
                 name: name,
                 number: number
             });
-            this.vehicleName = "";
-            this.vehicleNumber = "";
         };
 
         this.removeVehicle = function (index) {
