@@ -51,6 +51,9 @@
                             <em>{{vehicle.number}}</em>
                         </div>
                     </div>
+                    <div class="col-md-12" ng-if="vehicleCtrl.vehicles.length == 0">
+                        <div class="alert alert-info">Keine Teilnehmer angelegt.</div>
+                    </div>
                 </div>
             </div>
 
@@ -79,15 +82,9 @@
                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="message in msgCtrl.messages track by $index">
                         <strong>x + {{message.offset}}</strong><br/>
-<!--                        <div class="row">
-                            <div class="col-md-3"><strong>Sender:</strong> {{msgCtrl.getVehicle(message.src).name}}</div>
-                            <div class="col-md-3"><strong>Empfänger:</strong> {{msgCtrl.getVehicle(message.dst).name}}</div>
-                            <div class="col-md-3"><strong>Durchsage</strong> ({{message.announcement ? 'x' : ' '}})</div>
-                            <div class="col-md-3"><strong>Absetzzeit:</strong> x + {{message.offset}}</div>
-                        </div>-->
                         <hr>
                         <p>
-                            <strong>{{msgCtrl.getVehicle(message.dst).number}}</strong><br/>
+                            <span ng-repeat="dst in message.dst"><strong>{{msgCtrl.getVehicle(dst).number}}</strong><br/></span>
                             von <strong>{{msgCtrl.getVehicle(message.src).number}}</strong> &lt;{{message.announcement ? 'D' : 'G'}}&gt;<br/>
                             {{message.msg}}
                         </p>
