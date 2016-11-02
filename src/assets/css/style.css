@@ -19,3 +19,7 @@
 .monospace {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.no-break {
+    page-break-inside: avoid;
+}

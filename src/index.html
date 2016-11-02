@@ -63,24 +63,30 @@
                 <h2>Übung</h2>
                 <form>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="configDuration">Übungsdauer in Minuten</label>
-                                <input class="form-control" id="configDuration" ng-model="configCtrl.configDuration" type="number" ng-mod>
+                                <input class="form-control" id="configDuration" ng-model="configCtrl.config.duration" type="number">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="configInterval">Interval der Nachrichten in Minuten</label>
-                                <input class="form-control" id="configInterval" ng-model="configCtrl.configInterval" type="number">
+                                <input class="form-control" id="configInterval" ng-model="configCtrl.config.interval" type="number">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="configDelay">Verzögerung zur Startzeit in Minuten</label>
+                                <input class="form-control" id="configDelay" ng-model="configCtrl.config.delay" type="number">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="configCtrl.configMultipleDestinations"> Sammelrufe erzeugen
+                                    <input type="checkbox" ng-model="configCtrl.config.multipleDestinations"> Sammelrufe erzeugen
                                 </label>
                             </div>
                         </div>
@@ -93,7 +99,7 @@
             <div ng-controller="GenerateController as generateCtrl">
                 <div class="row">
                     <div class="col-md-offset-5 col-md-2">
-                        <button type="submit" class="btn btn-primary" style="width: 100%" ng-click="">Generieren</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%" ng-click="generateCtrl.generate()">Generieren</button>
                     </div>
                 </div>
             </div>
@@ -107,13 +113,13 @@
         <div class="panel-body">
             <div ng-controller="MessagesController as msgCtrl" class="monospace">
                 <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="message in msgCtrl.messages track by $index">
+                    <li class="list-group-item no-break" ng-repeat="message in msgCtrl.messages track by $index">
                         <strong>x + {{message.offset}}</strong><br/>
                         <hr>
                         <p>
                             <span ng-repeat="dst in message.dst"><strong>{{msgCtrl.getVehicle(dst).number}}</strong><br/></span>
                             von <strong>{{msgCtrl.getVehicle(message.src).number}}</strong> &lt;{{message.announcement ? 'D' : 'G'}}&gt;<br/>
-                            {{message.msg}}
+                            <pre>{{message.msg}}</pre>
                         </p>
                     </li>
                 </ul>
