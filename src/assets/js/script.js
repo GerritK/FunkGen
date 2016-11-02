@@ -76,11 +76,12 @@
                 }
 
                 var messageId = Math.floor(Math.random() * data.messages.length);
+                var announcement = Math.floor(Math.random() * 3) === 0;
 
                 messages.push({
-                    'src': vehicleId,
-                    'dst': destinations,
-                    'announcement': false,
+                    src: vehicleId,
+                    dst: destinations,
+                    announcement: announcement,
                     msg: data.messages[messageId],
                     offset: Math.floor(offset)
                 });

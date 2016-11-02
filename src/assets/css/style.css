@@ -24,6 +24,12 @@
     page-break-inside: avoid;
 }
 
+@media not print {
+    .print-only {
+        display: none;
+    }
+}
+
 @media print {
     .no-print {
         display: none;
