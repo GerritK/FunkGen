@@ -7,6 +7,10 @@
         });
     });
 
+    app.controller('MainController', function () {
+        this.vehicles = vehicles;
+    });
+
     app.controller('VehicleConfigController', function () {
         this.vehicles = vehicles;
 
@@ -22,10 +26,12 @@
                 name: name,
                 number: number
             });
+            messages.length = 0;
         };
 
         this.removeVehicle = function (index) {
             this.vehicles.splice(index, 1);
+            messages.length = 0;
         };
     });
 
@@ -67,7 +73,7 @@
 
                 for(n = 0; n < destinationCount; n++) {
                     var dst = Math.floor(Math.random() * vehicles.length);
-                    if(contains(destinations, dst)) {
+                    if(contains(destinations, dst) || dst === vehicleId) {
                         n--;
                         continue;
                     }
@@ -97,6 +103,19 @@
         this.getVehicle = function (id) {
             return vehicles[id];
         };
+    });
+
+    app.filter('sender', function () {
+        return function (input, sender) {
+            var result = [];
+
+            for(var i = 0; i < input.length; i++) {
+                if(input[i].src === sender) {
+                    result.push(input[i]);
+                }
+            }
+            return result;
+        }
     });
 
     function contains(array, value) {

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body ng-app="funk-gen">
-<div class="container">
+<div class="container" ng-controller="MainController as mainCtrl">
     <div class="title no-print">
         <h2>Funk Generator</h2>
     </div>
@@ -120,6 +120,34 @@
                             <span ng-repeat="dst in message.dst"><strong>{{msgCtrl.getVehicle(dst).number}}</strong><br/></span>
                             von <strong>{{msgCtrl.getVehicle(message.src).number}}</strong> &lt;{{message.announcement ? 'D' : 'G'}}&gt;<br/>
                             <pre>{{message.msg}}</pre>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default" ng-repeat="vehicle in mainCtrl.vehicles track by $index">
+        <div class="panel-heading">
+            {{vehicle.name}} - <em>{{vehicle.number}}</em>
+        </div>
+        <div class="panel-body monospace">
+            <div class="row print-only" ng-repeat="vehicle in mainCtrl.vehicles">
+                <div class="col-md-3">{{vehicle.name}}</div>
+                <div class="col-md-9">{{vehicle.number}}</div>
+            </div>
+
+            <hr class="print-only">
+
+            <div ng-controller="MessagesController as msgCtrl" class="monospace">
+                <ul class="list-group">
+                    <li class="list-group-item no-break" ng-repeat="message in (msgCtrl.messages | sender:$index) track by $index">
+                        <strong>x + {{message.offset}}</strong><br/>
+                        <hr>
+                        <p>
+                            <span ng-repeat="dst in message.dst"><strong>{{msgCtrl.getVehicle(dst).number}}</strong><br/></span>
+                            von <strong>{{msgCtrl.getVehicle(message.src).number}}</strong> &lt;{{message.announcement ? 'D' : 'G'}}&gt;<br/>
+                        <pre>{{message.msg}}</pre>
                         </p>
                     </li>
                 </ul>
