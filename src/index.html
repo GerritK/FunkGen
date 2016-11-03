@@ -99,14 +99,14 @@
             <div ng-controller="GenerateController as generateCtrl">
                 <div class="row">
                     <div class="col-md-offset-5 col-md-2">
-                        <button type="submit" class="btn btn-primary" style="width: 100%" ng-click="generateCtrl.generate()">Generieren</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%" ng-disabled="!generateCtrl.canGenerate()" ng-click="generateCtrl.generate()">Generieren</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="mainCtrl.messages.length > 0">
         <div class="panel-heading">
             Funküberwachung
         </div>
@@ -136,7 +136,7 @@
         </div>
     </div>
 
-    <div class="panel panel-default" ng-repeat="vehicle in mainCtrl.vehicles track by $index">
+    <div class="panel panel-default" ng-if="mainCtrl.messages.length > 0" ng-repeat="vehicle in mainCtrl.vehicles track by $index">
         <div class="panel-heading">
             {{vehicle.name}} - <em>{{vehicle.number}}</em>
         </div>

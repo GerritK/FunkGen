@@ -18,6 +18,7 @@
 
     app.controller('MainController', function () {
         this.vehicles = vehicles;
+        this.messages = messages;
     });
 
     app.controller('VehicleConfigController', function () {
@@ -54,6 +55,26 @@
     });
 
     app.controller('GenerateController', function (MessageService) {
+        this.canGenerate = function () {
+            if(vehicles.length == 0) {
+                return false;
+            }
+
+            if(!angular.isNumber(config.delay)) {
+                return false;
+            }
+
+            if(!angular.isNumber(config.interval)) {
+                return false;
+            }
+
+            if(!angular.isNumber(config.duration) || config.duration < (config.delay + config.interval)) {
+                return false;
+            }
+
+            return true;
+        };
+
         this.generate = function () {
             var messageCount = Math.floor((config.duration - config.delay) / config.interval);
             var maxMessagesPerVehicle = Math.ceil(messageCount / vehicles.length);
