@@ -5,7 +5,15 @@
   "Brücke {street:0} gesperrt.\nAnfahrtsweg {street:1}.",
   "Verkehrslage entspannt sich.\n{street:0} noch versperrt.",
   "Sämtliche Schneeräum-Kfz. im Bereich {city:0} eingesetzt.",
-  "Evakuierungsmaßnahmen Schule {city:0} eingesetzt.\nBereitstellungsraum {street:0}.",
+  "Evakuierungsmaßnahmen Schule {city:0} begonnen.\nBereitstellungsraum {street:0}.",
   "Bergung noch nicht abgeschlossen.",
-  "Chemikaliengroßhandlung {street:0} durch Funkenflug aus {street:1} stark gefährdet."
+  "Chemikaliengroßhandlung {street:0} durch Funkenflug aus {street:1} stark gefährdet.",
+  "Ölspur erstreckt sich von {street:0} über {street:1} und {street:2} bis {street:3}.\nBenötigen weitere Kräfte.",
+  "Feuer gelöscht. {street:0} weiterhin gesperrt.\nBeginnen Aufräumarbeiten - Dauer ca. 30 Minuten.",
+  "Verursache ist Herr {name:0}.\nBetriebsstoffe werden aufgenommen. Sind in 15 Minuten wieder einsatzbereit.",
+  "2 Patienten aufgenommen.\nFahren in das Krankenhaus {street:0}.",
+  "BMA Auslösung durch technischen Defekt. Haustechniker Herr {name:0} wurde informiert.\nSind wieder einsatzbereit.",
+  "Feuer aus. Keine weiteren Kräfte benötigt.",
+  "Feuer gelöscht. 200 Liter Wasser verbraucht.\nGeschädigter ist Herr {name:0}.",
+  "1 PKW mit KRAD zusammengestoßen.\n1 Patient unter Reanimation. 2 Leichtverletzte.\nBenötigen 1 NEF an der Einsatzstelle."
 ]
