@@ -97,6 +97,24 @@
         };
     });
 
+    app.controller('SupervisorController', function () {
+        this.duration = function () {
+            return config.duration;
+        };
+
+        this.interval = function () {
+            return config.interval;
+        };
+
+        this.vehicles = function () {
+            return vehicles.length;
+        };
+
+        this.messages = function () {
+            return messages.length;
+        };
+    });
+
     app.controller('MessagesController', function () {
         this.messages = messages;
 

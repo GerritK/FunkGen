@@ -111,6 +111,15 @@
             Funküberwachung
         </div>
         <div class="panel-body">
+            <div ng-controller="SupervisorController as supervisorCtrl">
+                Übungsdauer: {{supervisorCtrl.duration()}} Minuten<br/>
+                Nachrichtenabstand: {{supervisorCtrl.interval()}} Minuten <br/>
+                {{supervisorCtrl.vehicles()}} Funkstellen<br/>
+                {{supervisorCtrl.messages()}} Nachrichten
+            </div>
+
+            <hr>
+
             <div ng-controller="MessagesController as msgCtrl" class="monospace">
                 <ul class="list-group">
                     <li class="list-group-item no-break" ng-repeat="message in msgCtrl.messages track by $index">
@@ -132,23 +141,32 @@
             {{vehicle.name}} - <em>{{vehicle.number}}</em>
         </div>
         <div class="panel-body monospace">
-            <div class="row print-only" ng-repeat="vehicle in mainCtrl.vehicles">
-                <div class="col-md-3">{{vehicle.name}}</div>
-                <div class="col-md-9">{{vehicle.number}}</div>
-            </div>
+            <table class="table print-only">
+                <thead>
+                <tr>
+                    <th class="fit">lfd.Nr.</th>
+                    <th>Rufname</th>
+                    <th>taktische Bezeichnung</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="vehicle in mainCtrl.vehicles track by $index">
+                    <td class="number">{{$index}}</td>
+                    <td>{{vehicle.number}}</td>
+                    <td>{{vehicle.name}}</td>
+                </tr>
+                </tbody>
+            </table>
 
             <hr class="print-only">
 
             <div ng-controller="MessagesController as msgCtrl" class="monospace">
                 <ul class="list-group">
                     <li class="list-group-item no-break" ng-repeat="message in (msgCtrl.messages | sender:$index) track by $index">
-                        <strong>x + {{message.offset}}</strong><br/>
-                        <hr>
-                        <p>
-                            <span ng-repeat="dst in message.dst"><strong>{{msgCtrl.getVehicle(dst).number}}</strong><br/></span>
-                            von <strong>{{msgCtrl.getVehicle(message.src).number}}</strong> &lt;{{message.announcement ? 'D' : 'G'}}&gt;<br/>
+                        <span ng-class="{'strong': message.announcement}">({{message.announcement ? 'X' : ' '}}) Durchsage</span>&nbsp;&nbsp;<span>( ) Spruch</span><br/>
+                        Anschrift: <strong ng-repeat="dst in message.dst">{{msgCtrl.getVehicle(dst).name}}<span ng-if="!$last">, </span></strong>
                         <pre>{{message.msg}}</pre>
-                        </p>
+                        Abfassungszeit: <strong>x + {{message.offset}}</strong>
                     </li>
                 </ul>
             </div>

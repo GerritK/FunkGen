@@ -24,6 +24,20 @@
     page-break-inside: avoid;
 }
 
+td.fit,
+th.fit {
+    width: 1%;
+    white-space: nowrap;
+}
+
+td.number {
+    text-align: center;
+}
+
+.strong {
+    font-weight: bold;
+}
+
 @media not print {
     .print-only {
         display: none;
@@ -36,11 +50,15 @@
     }
 
     hr {
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .panel {
         page-break-after: always;
+    }
+
+    .table thead {
+        display: table-row-group;
     }
 }
