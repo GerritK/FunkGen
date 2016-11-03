@@ -250,11 +250,11 @@
     };
 
     var vehicles = [
-        {'name': 'TSF-W MA', 'number': 'Florian Braunschweig 9-41-43'},
-        {'name': 'TSF-W GF', 'number': 'Florian Braunschweig 9-41-44'},
-        {'name': 'TSF-W AT', 'number': 'Florian Braunschweig 9-41-45'},
-        {'name': 'TSF-W WT', 'number': 'Florian Braunschweig 9-41-46'},
-        {'name': 'TSF-W ST', 'number': 'Florian Braunschweig 9-41-47'}
+        {'name': 'LF Rautheim', 'number': 'Florian Braunschweig 9-45-41'},
+        {'name': 'TLF Mascherode', 'number': 'Florian Braunschweig 9-21-42'},
+        {'name': 'TSF-W Stöckheim', 'number': 'Florian Braunschweig 9-41-43'},
+        {'name': 'TSF-W Leiferde', 'number': 'Florian Braunschweig 9-41-44'},
+        {'name': 'LF Melverode', 'number': 'Florian Braunschweig 9-47-45'}
     ];
 
     var config = {
