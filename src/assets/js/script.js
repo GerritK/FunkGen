@@ -166,6 +166,11 @@
                                 break;
                         }
 
+                        var spell = Math.floor(Math.random() * 2) == 0;
+                        if(spell) {
+                            replacing = replacing.toUpperCase();
+                        }
+
                         replacings[match[0]][match[1]] = replacing;
                     } else {
                         replacing = replacings[match[0]][match[1]];
