@@ -91,7 +91,7 @@
             messages.length = 0;
 
             for(i = 0; i < messageCount; i++) {
-                var vehicleId = Math.floor(Math.random() * vehicles.length);
+                var vehicleId = _.random(vehicles.length - 1);
                 if(messagesPerVehicle[vehicleId].send >= maxMessagesPerVehicle) {
                     var lowest = -1;
                     for(var n = 0; n < vehicles.length; n++) {
@@ -103,11 +103,11 @@
                 }
                 messagesPerVehicle[vehicleId].send++;
 
-                var destinationCount = config.multipleDestinations && Math.floor(Math.random() * 3) == 0 ? Math.ceil(Math.random() * (vehicles.length - 2)) : 1;
+                var destinationCount = config.multipleDestinations && _.random(2) == 0 ? _.random(1, vehicles.length - 2) : 1;
                 var destinations = [];
 
                 for(n = 0; n < destinationCount; n++) {
-                    var dst = Math.floor(Math.random() * vehicles.length);
+                    var dst = _.random(vehicles.length - 1);
                     if(contains(destinations, dst) || dst === vehicleId) {
                         n--;
                         continue;
@@ -116,7 +116,7 @@
                     messagesPerVehicle[dst].receive++;
                 }
 
-                var announcement = Math.floor(Math.random() * 3) === 0;
+                var announcement = _.random(2) === 0;
 
                 messages.push({
                     src: vehicleId,
@@ -159,8 +159,7 @@
 
     app.service('MessageService', function () {
         this.getMessage = function () {
-            var msgId = Math.floor(Math.random() * data.messages.length);
-            var msg = data.messages[msgId];
+            var msg = _.sample(data.messages);
 
             var matches = msg.match(/\{([a-z]+):([0-9]*)*\}/g);
             if(angular.isArray(matches)) {
@@ -187,7 +186,7 @@
                                 break;
                         }
 
-                        var spell = Math.floor(Math.random() * 2) == 0;
+                        var spell = _.random(1) == 0;
                         if(spell) {
                             replacing = replacing.toUpperCase();
                         }
@@ -205,18 +204,15 @@
         };
 
         this.getStreet = function() {
-            var streetId = Math.floor(Math.random() * data.streets.length);
-            return data.streets[streetId];
+            return _.sample(data.streets);
         };
 
         this.getName = function() {
-            var nameId = Math.floor(Math.random() * data.names.length);
-            return data.names[nameId];
+            return _.sample(data.names);
         };
 
         this.getCity = function() {
-            var cityId = Math.floor(Math.random() * data.cities.length);
-            return data.cities[cityId];
+            return _.sample(data.cities);
         };
     });
 
