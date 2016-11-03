@@ -2,8 +2,17 @@
     var app = angular.module('funk-gen', []);
 
     app.run(function ($http) {
-        $http.get('messages.json').then(function (result) {
+        $http.get('assets/data/messages.json').then(function (result) {
             data.messages = result.data;
+        });
+        $http.get('assets/data/cities.json').then(function (result) {
+            data.cities = result.data;
+        });
+        $http.get('assets/data/streets.json').then(function (result) {
+            data.streets = result.data;
+        });
+        $http.get('assets/data/names.json').then(function (result) {
+            data.names = result.data;
         });
     });
 
@@ -35,11 +44,16 @@
         };
     });
 
-    app.controller('ConfigurationController', function () {
+    app.controller('ConfigurationController', function ($scope) {
         this.config = config;
+        $scope.$watch(function () {
+            return config;
+        }, function () {
+            messages.length = 0;
+        }, true);
     });
 
-    app.controller('GenerateController', function () {
+    app.controller('GenerateController', function (MessageService) {
         this.generate = function () {
             var messageCount = Math.floor((config.duration - config.delay) / config.interval);
             var maxMessagesPerVehicle = Math.ceil(messageCount / vehicles.length);
@@ -81,14 +95,13 @@
                     messagesPerVehicle[dst].receive++;
                 }
 
-                var messageId = Math.floor(Math.random() * data.messages.length);
                 var announcement = Math.floor(Math.random() * 3) === 0;
 
                 messages.push({
                     src: vehicleId,
                     dst: destinations,
                     announcement: announcement,
-                    msg: data.messages[messageId],
+                    msg: MessageService.getMessage(),
                     offset: Math.floor(offset)
                 });
 
@@ -123,6 +136,64 @@
         };
     });
 
+    app.service('MessageService', function () {
+        this.getMessage = function () {
+            var msgId = Math.floor(Math.random() * data.messages.length);
+            var msg = data.messages[msgId];
+
+            var matches = msg.match(/\{([a-z]+):([0-9]*)*\}/g);
+            if(angular.isArray(matches)) {
+                var replacings = {};
+                for(var i = 0; i < matches.length; i++) {
+                    var replacing = "";
+                    var match = matches[i].replace('{', '').replace('}', '').split(':');
+                    match[1] = parseInt(match[1]);
+
+                    if(!replacings[match[0]]) {
+                        replacings[match[0]] = [];
+                    }
+
+                    if(!replacings[match[0]][match[1]]) {
+                        switch(match[0]) {
+                            case 'street':
+                                replacing = this.getStreet();
+                                break;
+                            case 'name':
+                                replacing = this.getName();
+                                break;
+                            case 'city':
+                                replacing = this.getCity();
+                                break;
+                        }
+
+                        replacings[match[0]][match[1]] = replacing;
+                    } else {
+                        replacing = replacings[match[0]][match[1]];
+                    }
+
+                    msg = msg.replace(matches[i], replacing);
+                }
+            }
+
+            return msg;
+        };
+
+        this.getStreet = function() {
+            var streetId = Math.floor(Math.random() * data.streets.length);
+            return data.streets[streetId];
+        };
+
+        this.getName = function() {
+            var nameId = Math.floor(Math.random() * data.names.length);
+            return data.names[nameId];
+        };
+
+        this.getCity = function() {
+            var cityId = Math.floor(Math.random() * data.cities.length);
+            return data.cities[cityId];
+        };
+    });
+
     app.filter('sender', function () {
         return function (input, sender) {
             var result = [];
@@ -146,7 +217,10 @@
     }
 
     var data = {
-        'messages': []
+        messages: [],
+        streets: [],
+        cities: [],
+        names: []
     };
 
     var vehicles = [
