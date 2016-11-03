@@ -1,6 +1,11 @@
 [
-  "Verkehrsunfall mit 5 PKW\n2 Verletzte Personen\nBenötigen 2 RTW und 1 NEF",
-  "Brennt eine Gartenlaube\n1 C- und ein B-Rohr im Einsatz",
-  "Verpflegung an der {street:0} benötigt\nAnfahren über {street:1}",
-  "Brücke {city:0} gesperrt.\nAnfahrtsweg {city:1}"
+  "Verkehrsunfall mit 5 PKW Ortsausgang {city:0}.\n2 Verletzte Personen.\nBenötigen 2 RTW und 1 NEF.",
+  "Brennt eine Gartenlaube.\n1 C- und ein B-Rohr im Einsatz.",
+  "Verpflegung an der Einsatzstelle {street:0} benötigt.\nAnfahren über {street:1}.",
+  "Brücke {street:0} gesperrt.\nAnfahrtsweg {street:1}.",
+  "Verkehrslage entspannt sich.\n{street:0} noch versperrt.",
+  "Sämtliche Schneeräum-Kfz. im Bereich {city:0} eingesetzt.",
+  "Evakuierungsmaßnahmen Schule {city:0} eingesetzt.\nBereitstellungsraum {street:0}.",
+  "Bergung noch nicht abgeschlossen.",
+  "Chemikaliengroßhandlung {street:0} durch Funkenflug aus {street:1} stark gefährdet."
 ]
