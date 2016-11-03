@@ -103,7 +103,7 @@
                 }
                 messagesPerVehicle[vehicleId].send++;
 
-                var destinationCount = config.multipleDestinations && _.random(2) == 0 ? _.random(1, vehicles.length - 2) : 1;
+                var destinationCount = config.multipleDestinations && _.random(100) <= config.multipleDestinationsRate ? _.random(1, vehicles.length - 2) : 1;
                 var destinations = [];
 
                 for(n = 0; n < destinationCount; n++) {
@@ -116,7 +116,7 @@
                     messagesPerVehicle[dst].receive++;
                 }
 
-                var announcement = _.random(2) === 0;
+                var announcement = _.random(1, 100) <= config.announcementRate;
 
                 messages.push({
                     src: vehicleId,
@@ -257,7 +257,9 @@
         duration: 60,
         interval: 2.5,
         delay: 5,
-        multipleDestinations: true
+        multipleDestinations: true,
+        announcementRate: 50,
+        multipleDestinationsRate: 33
     };
 
     var messages = [];

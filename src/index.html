@@ -85,6 +85,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="configAnnouncementRate">Wahrscheinlichkeit für Durchsagen</label>
+                                <input class="form-control" id="configAnnouncementRate" ng-model="configCtrl.config.announcementRate" type="number" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="configMultipleDestinationsRate">Wahrscheinlichtkeit für Sammelrufe</label>
+                                <input class="form-control" id="configMultipleDestinationsRate" ng-model="configCtrl.config.multipleDestinationsRate" ng-disabled="!configCtrl.config.multipleDestinations" type="number" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" ng-model="configCtrl.config.multipleDestinations"> Sammelrufe erzeugen
