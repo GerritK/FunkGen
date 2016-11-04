@@ -129,6 +129,27 @@
                 Nachrichtenabstand: {{supervisorCtrl.interval()}} Minuten <br/>
                 {{supervisorCtrl.vehicles()}} Funkstellen<br/>
                 {{supervisorCtrl.messages()}} Nachrichten
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="fit">lfd.Nr.</th>
+                        <th>Rufname</th>
+                        <th>taktische Bezeichnung</th>
+                        <th>Funksprüche</th>
+                        <th>davon Durchsagen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="vehicle in mainCtrl.vehicles track by $index">
+                        <td class="number">{{$index}}</td>
+                        <td>{{vehicle.number}}</td>
+                        <td>{{vehicle.name}}</td>
+                        <td>{{supervisorCtrl.messagesPerVehicle($index)}}</td>
+                        <td>{{supervisorCtrl.announcementsPerVehicle($index)}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <hr>

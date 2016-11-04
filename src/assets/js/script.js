@@ -72,6 +72,14 @@
                 return false;
             }
 
+            if(!angular.isNumber(config.announcementRate) || config.announcementRate > 100 || config.announcementRate < 0) {
+                return false;
+            }
+
+            if(!angular.isNumber(config.multipleDestinationsRate) || config.multipleDestinationsRate > 100 || config.multipleDestinationsRate < 0) {
+                return false;
+            }
+
             return true;
         };
 
@@ -84,7 +92,8 @@
             for(var i = 0; i < vehicles.length; i++) {
                 messagesPerVehicle[i] = {
                     send: 0,
-                    receive: 0
+                    received: 0,
+                    announcements: 0
                 };
             }
 
@@ -113,10 +122,13 @@
                         continue;
                     }
                     destinations[n] = dst;
-                    messagesPerVehicle[dst].receive++;
+                    messagesPerVehicle[dst].received++;
                 }
 
                 var announcement = _.random(1, 100) <= config.announcementRate;
+                if(announcement) {
+                    messagesPerVehicle[vehicleId].announcements++;
+                }
 
                 messages.push({
                     src: vehicleId,
@@ -131,7 +143,7 @@
         };
     });
 
-    app.controller('SupervisorController', function () {
+    app.controller('SupervisorController', function ($filter) {
         this.duration = function () {
             return config.duration;
         };
@@ -146,6 +158,15 @@
 
         this.messages = function () {
             return messages.length;
+        };
+
+        this.messagesPerVehicle = function (vehicleId) {
+            return $filter('sender')(messages, vehicleId).length;
+        };
+
+        this.announcementsPerVehicle = function (vehicleId) {
+            var messagesForVehicle = $filter('sender')(messages, vehicleId);
+            return $filter('announcements')(messagesForVehicle).length;
         };
     });
 
@@ -222,6 +243,19 @@
 
             for(var i = 0; i < input.length; i++) {
                 if(input[i].src === sender) {
+                    result.push(input[i]);
+                }
+            }
+            return result;
+        }
+    });
+
+    app.filter('announcements', function () {
+        return function (input) {
+            var result = [];
+
+            for(var i = 0; i < input.length; i++) {
+                if(input[i].announcement) {
                     result.push(input[i]);
                 }
             }
