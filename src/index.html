@@ -130,6 +130,8 @@
                 {{supervisorCtrl.vehicles()}} Funkstellen<br/>
                 {{supervisorCtrl.messages()}} Nachrichten
 
+                <hr>
+
                 <table class="table">
                     <thead>
                     <tr>
@@ -142,7 +144,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="vehicle in mainCtrl.vehicles track by $index">
-                        <td class="number">{{$index}}</td>
+                        <td class="number">{{$index + 1}}</td>
                         <td>{{vehicle.number}}</td>
                         <td>{{vehicle.name}}</td>
                         <td>{{supervisorCtrl.messagesPerVehicle($index)}}</td>
@@ -185,7 +187,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="vehicle in mainCtrl.vehicles track by $index">
-                    <td class="number">{{$index}}</td>
+                    <td class="number">{{$index + 1}}</td>
                     <td>{{vehicle.number}}</td>
                     <td>{{vehicle.name}}</td>
                 </tr>
