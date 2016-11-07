@@ -96,10 +96,19 @@
                                 <input class="form-control" id="configMultipleDestinationsRate" ng-model="configCtrl.config.multipleDestinationsRate" ng-disabled="!configCtrl.config.multipleDestinations" type="number" min="0" max="100">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" ng-model="configCtrl.config.multipleDestinations"> Sammelrufe erzeugen
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="configCtrl.config.spell"> Zu buchstabierende Worte durch Großschreibung kennzeichnen
                                 </label>
                             </div>
                         </div>

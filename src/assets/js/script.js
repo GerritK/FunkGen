@@ -207,7 +207,7 @@
                                 break;
                         }
 
-                        var spell = _.random(1) == 0;
+                        var spell = _.random(1) == 0 && config.spell;
                         if(spell) {
                             replacing = replacing.toUpperCase();
                         }
@@ -292,6 +292,7 @@
         interval: 2.5,
         delay: 5,
         multipleDestinations: true,
+        spell: true,
         announcementRate: 50,
         multipleDestinationsRate: 33
     };
