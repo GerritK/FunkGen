@@ -55,6 +55,8 @@
     });
 
     app.controller('GenerateController', function (MessageService) {
+        var messagesPerVehicle;
+
         this.canGenerate = function () {
             if(vehicles.length == 0) {
                 return false;
@@ -86,8 +88,8 @@
         this.generate = function () {
             var messageCount = Math.floor((config.duration - config.delay) / config.interval);
             var maxMessagesPerVehicle = Math.ceil(messageCount / vehicles.length);
-            var messagesPerVehicle = [];
             var offset = config.delay;
+            messagesPerVehicle = [];
 
             for(var i = 0; i < vehicles.length; i++) {
                 messagesPerVehicle[i] = {
@@ -100,22 +102,14 @@
             messages.length = 0;
 
             for(i = 0; i < messageCount; i++) {
-                var vehicleId = _.random(vehicles.length - 1);
-                if(messagesPerVehicle[vehicleId].send >= maxMessagesPerVehicle) {
-                    var lowest = -1;
-                    for(var n = 0; n < vehicles.length; n++) {
-                        if(lowest == -1 || lowest > messagesPerVehicle[n].send) {
-                            lowest = messagesPerVehicle[n].send;
-                            vehicleId = n;
-                        }
-                    }
-                }
+                var nextVehicles = getNextVehicleList(messagesPerVehicle);
+                var vehicleId = nextVehicles[_.random(nextVehicles.length - 1)];
                 messagesPerVehicle[vehicleId].send++;
 
                 var destinationCount = config.multipleDestinations && _.random(100) <= config.multipleDestinationsRate ? _.random(1, vehicles.length - 2) : 1;
                 var destinations = [];
 
-                for(n = 0; n < destinationCount; n++) {
+                for(var n = 0; n < destinationCount; n++) {
                     var dst = _.random(vehicles.length - 1);
                     if(contains(destinations, dst) || dst === vehicleId) {
                         n--;
@@ -125,7 +119,8 @@
                     messagesPerVehicle[dst].received++;
                 }
 
-                var announcement = _.random(1, 100) <= config.announcementRate;
+                var announcement = _.random(1, 100) <= config.announcementRate
+                    && messagesPerVehicle[vehicleId].announcements <= maxMessagesPerVehicle / (config.announcementRate / 100);
                 if(announcement) {
                     messagesPerVehicle[vehicleId].announcements++;
                 }
@@ -141,6 +136,25 @@
                 offset += config.interval;
             }
         };
+
+        function getNextVehicleList(messagesPerVehicle) {
+            var minMessages = -1;
+            var result = [];
+
+            for(var i = 0; i < vehicles.length; i++) {
+                if(minMessages == -1 || messagesPerVehicle[i].send < minMessages) {
+                    minMessages = messagesPerVehicle[i].send;
+                }
+            }
+
+            for(i = 0; i < vehicles.length; i++) {
+                if(messagesPerVehicle[i].send == minMessages) {
+                    result.push(i);
+                }
+            }
+
+            return result;
+        }
     });
 
     app.controller('SupervisorController', function ($filter) {
