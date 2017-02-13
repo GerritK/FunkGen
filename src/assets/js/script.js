@@ -95,7 +95,8 @@
                 messagesPerVehicle[i] = {
                     send: 0,
                     received: 0,
-                    announcements: 0
+                    announcements: 0,
+                    multipleDestinations: 0
                 };
             }
 
@@ -108,6 +109,14 @@
 
                 var destinationCount = config.multipleDestinations && _.random(100) <= config.multipleDestinationsRate ? _.random(1, vehicles.length - 2) : 1;
                 var destinations = [];
+
+                if(destinationCount > 1) {
+                    if(messagesPerVehicle[vehicleId].multipleDestinations <= maxMessagesPerVehicle / (config.multipleDestinationsRate / 100)) {
+                        messagesPerVehicle[vehicleId].multipleDestinations++;
+                    } else {
+                        destinationCount = 1;
+                    }
+                }
 
                 for(var n = 0; n < destinationCount; n++) {
                     var dst = _.random(vehicles.length - 1);
@@ -182,6 +191,11 @@
             var messagesForVehicle = $filter('sender')(messages, vehicleId);
             return $filter('announcements')(messagesForVehicle).length;
         };
+
+        this.multipleDestinationsPerVehicle = function (vehicleId) {
+            var messagesForVehicle = $filter('sender')(messages, vehicleId);
+            return $filter('multipleDestinations')(messagesForVehicle).length;
+        }
     });
 
     app.controller('MessagesController', function () {
@@ -270,6 +284,19 @@
 
             for(var i = 0; i < input.length; i++) {
                 if(input[i].announcement) {
+                    result.push(input[i]);
+                }
+            }
+            return result;
+        }
+    });
+
+    app.filter('multipleDestinations', function () {
+        return function (input) {
+            var result = [];
+
+            for(var i = 0; i < input.length; i++) {
+                if(input[i].dst.length > 1) {
                     result.push(input[i]);
                 }
             }

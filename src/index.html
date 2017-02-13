@@ -149,6 +149,7 @@
                         <th>taktische Bezeichnung</th>
                         <th>Funksprüche</th>
                         <th>davon Durchsagen</th>
+                        <th>davon Sammelrufe</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -158,6 +159,7 @@
                         <td>{{vehicle.name}}</td>
                         <td>{{supervisorCtrl.messagesPerVehicle($index)}}</td>
                         <td>{{supervisorCtrl.announcementsPerVehicle($index)}}</td>
+                        <td>{{supervisorCtrl.multipleDestinationsPerVehicle($index)}}</td>
                     </tr>
                     </tbody>
                 </table>
