@@ -38,6 +38,15 @@ td.number {
     font-weight: bold;
 }
 
+.panel-heading {
+    font-weight: bold;
+}
+
+pre.message {
+    white-space: pre-wrap;
+    word-break: normal;
+}
+
 @media not print {
     .print-only {
         display: none;
@@ -56,9 +65,38 @@ td.number {
 
     .panel {
         page-break-after: always;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    .panel-heading {
+        padding-left: 0;
+        font-size: 150%;
+    }
+
+    .panel-default > .panel-heading {
+        border-color: #808080;
+    }
+
+    .panel-body {
+        padding: 10px 0 0;
+        margin: 0;
     }
 
     .table thead {
         display: table-row-group;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: #808080;
+    }
+
+    hr {
+        border-color: #808080;
+    }
+
+    .list-group-item {
+        border: 1px solid #808080;
     }
 }
