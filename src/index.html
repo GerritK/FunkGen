@@ -158,8 +158,14 @@
                         <td>{{vehicle.number}}</td>
                         <td>{{vehicle.name}}</td>
                         <td>{{supervisorCtrl.messagesPerVehicle($index)}}</td>
-                        <td>{{supervisorCtrl.announcementsPerVehicle($index)}}</td>
-                        <td>{{supervisorCtrl.multipleDestinationsPerVehicle($index)}}</td>
+                        <td>
+                            {{supervisorCtrl.announcementsPerVehicle($index)}}
+                            <i>({{(supervisorCtrl.announcementsPerVehicle($index) / supervisorCtrl.messagesPerVehicle($index) * 100) | number:0}}%)</i>
+                        </td>
+                        <td>
+                            {{supervisorCtrl.multipleDestinationsPerVehicle($index)}}
+                            <i>({{(supervisorCtrl.multipleDestinationsPerVehicle($index) / supervisorCtrl.messagesPerVehicle($index) * 100) | number:0}}%)</i>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

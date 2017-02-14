@@ -111,7 +111,7 @@
                 var destinations = [];
 
                 if(destinationCount > 1) {
-                    if(messagesPerVehicle[vehicleId].multipleDestinations <= maxMessagesPerVehicle / (config.multipleDestinationsRate / 100)) {
+                    if(messagesPerVehicle[vehicleId].multipleDestinations <= maxMessagesPerVehicle * (config.multipleDestinationsRate / 100)) {
                         messagesPerVehicle[vehicleId].multipleDestinations++;
                     } else {
                         destinationCount = 1;
@@ -129,7 +129,7 @@
                 }
 
                 var announcement = _.random(1, 100) <= config.announcementRate
-                    && messagesPerVehicle[vehicleId].announcements <= maxMessagesPerVehicle / (config.announcementRate / 100);
+                    && messagesPerVehicle[vehicleId].announcements < maxMessagesPerVehicle * (config.announcementRate / 100);
                 if(announcement) {
                     messagesPerVehicle[vehicleId].announcements++;
                 }
