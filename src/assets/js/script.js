@@ -103,7 +103,7 @@
             messages.length = 0;
 
             for(i = 0; i < messageCount; i++) {
-                var nextVehicles = getNextVehicleList(messagesPerVehicle);
+                var nextVehicles = getNextVehicleList();
                 var vehicleId = nextVehicles[_.random(nextVehicles.length - 1)];
                 messagesPerVehicle[vehicleId].send++;
 
@@ -146,7 +146,7 @@
             }
         };
 
-        function getNextVehicleList(messagesPerVehicle) {
+        function getNextVehicleList() {
             var minMessages = -1;
             var result = [];
 
